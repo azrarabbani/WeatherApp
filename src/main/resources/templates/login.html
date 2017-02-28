@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Weather Test Application</title>
+    <!--<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"-->
+          <!--href="../../css/bootstrap.min.css" />-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />-->
+    <style>
+        body {background-color: powderblue;}
+        h2   {
+            color: blue;
+            float: left;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            height: 41px;
+            line-height: 41px;
+          }
+        p    {color: red;}
+</style>
+</head>
+<body style="height: 100%" class="body">
+
+<table width="100%">
+    <tr>
+        <td>
+            <div class="content">
+            <h2>Welcome to Weather Test Application</h2>
+            </div>
+        </td>
+    </tr>
+</table>
+<table width="100%">
+    <tr>
+        <td width="50%">
+            <div class="content">
+                <p th:if="${param.logout}" class="alert">You have been logged out</p>
+                <p th:if="${param.error}" class="alert alert-error">There was an error, please try again</p>
+                <h2>Login</h2>
+                <form name="form" th:action="@{/login}" action="/login" method="POST">
+                    <fieldset>
+                        <input type="text" name="username" value="" placeholder="Username" /><br/>
+                        <input type="password" name="password" placeholder="Password" />
+                    </fieldset>
+                    <input type="submit" id="login" value="Login"
+                           class="btn btn-primary" />
+                </form>
+            </div>
+        </td>
+        <td width="50%">
+            <div class="content">
+                <p th:if="${param.signupsuccess}" class="alert alert-error">There was an error, please try again</p>
+                <h2>Sign Up</h2>
+                <form name="form" th:action="@{/login/addNewUser}" action="/login/addNewUser" method="POST">
+                    <fieldset>
+                        <input type="text" name="email" value="" placeholder="Email" /><br/>
+                        <input type="text" name="name" value="" placeholder="Username" /><br/>
+                        <input type="password" name="password" placeholder="Password" />
+                    </fieldset>
+                    <input type="submit" id="signup" value="Sign Up"
+                           class="btn btn-primary" />
+                </form>
+            </div>
+            <!--<form th:action="@{/login/addNewUser}" method="post">-->
+            <!--<table>-->
+                <!--<tr>-->
+                    <!--<td>-->
+                        <!--Email :-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<input type="text" name="email"/>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>-->
+                        <!--User Name :-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<input type="text" name="userName"/>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>-->
+                        <!--Password :-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<input type="password" name="password"/>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td colspan="2">-->
+                        <!--<input type="submit" value="Sign Up"/>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+            <!--</form>-->
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Weather Test Application</title>
+    <!--<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"-->
+          <!--href="../../css/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script>
+        angular.module('demo', [])
+.controller('Hello', function($scope, $http) {
+    $http.get('http://localhost:8080/weather?country=USA&state=CA&city=SAn Francisco').
+        then(function(response) {
+            $scope.greeting = response.data;
+        });
+});
+
+    </script>
+    <style>
+        body {background-color: powderblue;}
+        h2   {
+            color: blue;
+            float: left;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            height: 41px;
+            line-height: 41px;
+          }
+        p    {color: red;}
+</style>
+</head>
+<body>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<h2>Welcome to Weather Update</h2>
+<table>
+    <tr>
+        <td>
+            <div align="center">
+                 <p><a href="/weather/export/csv">Download Weather update as CSV</a></p>
+            </div>
+        </td>
+        <td>
+            <p>
+                <a href="/weather/history">Weather History</a>
+            </p>
+        </td>
+    </tr>
+
+</table>
+
+
+<table>
+    <tr>
+        <th>Temperature</th>
+        <th>Weather Condition</th>
+        <th>Date Time</th>
+    </tr>
+    <tr data-th-each="weather : ${weatherUpdates}">
+        <td data-th-text="${weather.temperature}"></td>
+        <td data-th-text="${weather.weatherCondition}"></td>
+        <td data-th-text="${#dates.format(weather.weatherTime)}"></td>
+    </tr>
+</table>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>
